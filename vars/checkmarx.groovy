@@ -2,9 +2,9 @@ def call(Map config) {
     pipeline {
         agent any
         environment {
-            EMAIL_RECIPIENTS        =   config.email_recipients
-            CHECKMARX_CREDENTIAL_ID =   config.checkmarx_credential_id
-            CHECKMARX_HOST          =   config.checkmarx_host
+            EMAIL_RECIPIENTS        =   "$config.email_recipients"
+            CHECKMARX_CREDENTIAL_ID =   "$config.checkmarx_credential_id"
+            CHECKMARX_HOST          =   "$config.checkmarx_host"
         }
         stages {
             stage('Cleanup & Checkout'){
@@ -17,15 +17,15 @@ def call(Map config) {
             stage('Execute CheckMarx Scan'){
                 steps {
                     step([$class: 'CxScanBuilder', comment: '',
-                            projectName: config.projectName ,
-                            comment: config.comment,
-                            teamPath: config.teamPath,
+                            projectName: "$config.projectName",
+                            comment: "$config.comment",
+                            teamPath: "$config.teamPath",
                             useOwnServerCredentials: true,
                             credentialsId: "$CHECKMARX_CREDENTIAL_ID",
                             sastEnabled: true,
                             avoidDuplicateProjectScans: true,
-                            excludeFolders: config.excludeFolders,
-                            //excludeOpenSourceFolders: config.excludeOpenSourceFolders,
+                            excludeFolders: "$config.excludeFolders",
+                            excludeOpenSourceFolders: "$config.excludeOpenSourceFolders",
                             exclusionsSetting: 'job',
                             failBuildOnNewResults: true,
                             failBuildOnNewSeverity: 'HIGH',
