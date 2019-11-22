@@ -25,7 +25,7 @@ def call(Map config) {
                             sastEnabled: true,
                             avoidDuplicateProjectScans: true,
                             excludeFolders: config.excludeFolders,
-                            excludeOpenSourceFolders: config.excludeOpenSourceFolders,
+                            //excludeOpenSourceFolders: config.excludeOpenSourceFolders,
                             exclusionsSetting: 'job',
                             failBuildOnNewResults: true,
                             failBuildOnNewSeverity: 'HIGH',
